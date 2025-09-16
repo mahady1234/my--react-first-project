@@ -7,8 +7,30 @@ import Counter from './Count';
 import Cricket from './Cricket';
 import Bowler from './Bolling'
 import Match from './Play'
+import Result from './Rumi'
+import { Suspense } from 'react';
+import Friends from './Friends';
+
+
+const fetchUser = fetch('https://jsonplaceholder.typicode.com/users')
+  .then(res => res.json())
+
+const fetchData = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/comments")
+  return res.json();
+}
+// const fetchData = async () => {
+//   const res = await fetch("https://jsonplaceholder.typicode.com/users")
+//   return res.json();
+// }
+// const fetchData = async () => {
+//   const res = await fetch("https://jsonplaceholder.typicode.com/posts")
+//   return res.json();
+// }
 
 function App() {
+
+  const fetchFriends = fetchData()
   const actors = ["Bappa Raj", "Salman Shah", "Manna", "Omar Sani", "Anwar", "Jasim", "Bappa Raj", "Salman Shah", "Manna", "Omar Sani", "Anwar", "Jasim"];
 
   const family = [
@@ -43,6 +65,16 @@ function App() {
   return (
     <>
       <h1>Vite + React</h1>
+
+      <Suspense fallback={<h3>Friends are coming for treat......</h3>}>
+        <Friends fetchFriends={fetchFriends}></Friends>
+      </Suspense>
+
+
+
+      <Suspense fallback={<h3>Loading data ......</h3>}>
+        <Result fetchUser={fetchUser}></Result>
+      </Suspense>
 
       <Match></Match>
 
