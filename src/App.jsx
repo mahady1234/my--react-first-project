@@ -10,7 +10,7 @@ import Match from './Play'
 import Result from './Rumi'
 import { Suspense } from 'react';
 import Friends from './Friends';
-
+import Players from './Players';
 
 const fetchUser = fetch('https://jsonplaceholder.typicode.com/users')
   .then(res => res.json())
@@ -65,6 +65,8 @@ function App() {
   return (
     <>
       <h1>Vite + React</h1>
+
+      <Players></Players>
 
       <Suspense fallback={<h3>Friends are coming for treat......</h3>}>
         <Friends fetchFriends={fetchFriends}></Friends>
